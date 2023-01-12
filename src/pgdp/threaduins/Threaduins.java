@@ -56,6 +56,10 @@ public final class  Threaduins {
 	 */
 	public static void stopWorkaholic(Thread workaholic) {
 		// TODO
+		workaholic.run();
+		signal.await();
+		workaholic.interrupt();
+		System.out.println(STOP_MSG);
 	}
 
 	/**
