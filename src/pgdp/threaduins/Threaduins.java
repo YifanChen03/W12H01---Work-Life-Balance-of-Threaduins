@@ -82,7 +82,7 @@ public final class  Threaduins {
 		// TODO
 		Thread output = new Thread(() -> {
 			s.println(PROCRASTINATOR_PROCRASTINATING_MSG);
-			Thread.sleep();
+			Thread.onSpinWait();
 			System.out.println(LUCKY_PROCRASTINATOR_WORKING_MSG);
 		});
 
