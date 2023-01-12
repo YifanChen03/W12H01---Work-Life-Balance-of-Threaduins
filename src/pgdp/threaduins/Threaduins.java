@@ -83,16 +83,14 @@ public final class  Threaduins {
 		Thread output = new Thread() {
 			@Override
 			public void run() {
-				synchronized (this) {
-					s.println(PROCRASTINATOR_PROCRASTINATING_MSG);
-					//make Thread wait
-					try {
-						this.wait();
-					} catch (InterruptedException e) {
-						throw new RuntimeException(e);
-					}
-					System.out.println(LUCKY_PROCRASTINATOR_WORKING_MSG);
+				s.println(PROCRASTINATOR_PROCRASTINATING_MSG);
+				//make Thread wait
+				try {
+					this.wait();
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
 				}
+				System.out.println(LUCKY_PROCRASTINATOR_WORKING_MSG);
 			}
 		};
 
