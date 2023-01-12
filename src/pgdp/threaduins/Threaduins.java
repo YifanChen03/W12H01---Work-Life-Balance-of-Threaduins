@@ -56,22 +56,18 @@ public final class  Threaduins {
 	 */
 	public static void stopWorkaholic(Thread workaholic) {
 		// TODO
-		//Thread stopWorkaholicThread = new Thread(() -> {
-		//	signal.await();
-		//	workaholic.interrupt();
-		//});
+		System.out.println(STOP_MSG);
 		workaholic.start();
 		signal.await();
 		workaholic.interrupt();
-		//stopWorkaholicThread.start();
+
 		try {
 			workaholic.join();
-			//stopWorkaholicThread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(STOP_MSG);
+		System.out.println(STOPPED_MSG);
 	}
 
 	/**
