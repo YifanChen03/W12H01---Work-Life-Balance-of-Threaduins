@@ -57,8 +57,8 @@ public final class  Threaduins {
 	 */
 	public static void stopWorkaholic(Thread workaholic) {
 		// TODO
-		System.out.println(STOP_MSG);
 		workaholic.start();
+		System.out.println(STOP_MSG);
 		signal.await();
 		workaholic.interrupt();
 
@@ -80,11 +80,21 @@ public final class  Threaduins {
 	 */
 	public static Thread getLuckyProcrastinator(PrintStream s) {
 		// TODO
-		Thread output = new Thread(() -> {
-			s.println(PROCRASTINATOR_PROCRASTINATING_MSG);
-			Thread.onSpinWait();
-			System.out.println(LUCKY_PROCRASTINATOR_WORKING_MSG);
-		});
+		Thread output = new Thread() {
+			@Override
+			public void run() {
+				synchronized (this) {
+					s.println(PROCRASTINATOR_PROCRASTINATING_MSG);
+					//make Thread wait
+					try {
+						this.wait();
+					} catch (InterruptedException e) {
+						throw new RuntimeException(e);
+					}
+					System.out.println(LUCKY_PROCRASTINATOR_WORKING_MSG);
+				}
+			}
+		};
 
 		return output;
 	}
@@ -97,10 +107,12 @@ public final class  Threaduins {
 	 */
 	public static void stopProcrastinator(Thread procrastinator) {
 		// TODO
-		System.out.println(STOP_MSG);
 		procrastinator.start();
+		System.out.println(STOP_MSG);
 		signal.await();
-		procrastinator.notify();
+		synchronized (procrastinator) {
+			procrastinator.notify();
+		}
 
 		try {
 			procrastinator.join();
@@ -117,12 +129,12 @@ public final class  Threaduins {
 		Threaduins.setSignal(new ConsoleSignal());
 
 		// workaholic example
-		final Thread workaholic = getWorkaholic(System.out);
-		stopWorkaholic(workaholic);
+		//final Thread workaholic = getWorkaholic(System.out);
+		//stopWorkaholic(workaholic);
 
 		// procrastinator example
-		// final Thread luckyProc = getLuckyProcrastinator(System.out);
-		// stopProcrastinator(luckyProc);
+		final Thread luckyProc = getLuckyProcrastinator(System.out);
+		stopProcrastinator(luckyProc);
 	}
 
 }
