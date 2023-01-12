@@ -86,7 +86,7 @@ public final class  Threaduins {
 				s.println(PROCRASTINATOR_PROCRASTINATING_MSG);
 				//make Thread wait
 				try {
-					wait();
+					Thread.currentThread().wait();
 				} catch (InterruptedException e) {
 					throw new RuntimeException(e);
 				}
