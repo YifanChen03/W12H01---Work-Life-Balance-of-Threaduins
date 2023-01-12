@@ -1,6 +1,7 @@
 package pgdp.threaduins;
 
 import java.io.PrintStream;
+import java.util.Objects;
 
 public final class  Threaduins {
 
@@ -81,7 +82,7 @@ public final class  Threaduins {
 		// TODO
 		Thread output = new Thread(() -> {
 			s.println(PROCRASTINATOR_PROCRASTINATING_MSG);
-			Thread.onSpinWait();
+			Thread.sleep();
 			System.out.println(LUCKY_PROCRASTINATOR_WORKING_MSG);
 		});
 
@@ -96,6 +97,7 @@ public final class  Threaduins {
 	 */
 	public static void stopProcrastinator(Thread procrastinator) {
 		// TODO
+		System.out.println(STOP_MSG);
 		procrastinator.start();
 		signal.await();
 		procrastinator.notify();
