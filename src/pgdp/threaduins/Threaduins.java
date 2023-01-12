@@ -39,7 +39,7 @@ public final class  Threaduins {
 		// TODO
 		Thread output = new Thread(() -> {
 			while (true) {
-				if (Thread.currentThread().isInterrupted()) {
+				if (Thread.interrupted()) {
 					s.println(WORKAHOLIC_STOP_MSG);
 				}
 				s.println(WORKAHOLIC_WORKING_MSG);
