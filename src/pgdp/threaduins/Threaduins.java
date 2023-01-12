@@ -38,12 +38,10 @@ public final class  Threaduins {
 	public static Thread getWorkaholic(PrintStream s) {
 		// TODO
 		Thread output = new Thread(() -> {
-			while (true) {
-				if (Thread.interrupted()) {
-					s.println(WORKAHOLIC_STOP_MSG);
-				}
+			while (!Thread.interrupted()) {
 				s.println(WORKAHOLIC_WORKING_MSG);
 			}
+			s.println(WORKAHOLIC_STOP_MSG);
 		});
 
 		return output;
