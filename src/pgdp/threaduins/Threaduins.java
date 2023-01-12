@@ -2,7 +2,7 @@ package pgdp.threaduins;
 
 import java.io.PrintStream;
 
-public final class Threaduins {
+public final class  Threaduins {
 
 	static final String WORKAHOLIC_WORKING_MSG = "Leave me alone! I'm working!";
 	static final String WORKAHOLIC_STOP_MSG = "No! Why would you interrupt me?!?";
@@ -37,7 +37,16 @@ public final class Threaduins {
 	 */
 	public static Thread getWorkaholic(PrintStream s) {
 		// TODO
-		return null;
+		Thread output = new Thread(() -> {
+			while (true) {
+				if (Thread.currentThread().isInterrupted()) {
+					s.println(WORKAHOLIC_STOP_MSG);
+				}
+				s.println(WORKAHOLIC_WORKING_MSG);
+			}
+		});
+
+		return output;
 	}
 
 	/**
