@@ -79,7 +79,13 @@ public final class  Threaduins {
 	 */
 	public static Thread getLuckyProcrastinator(PrintStream s) {
 		// TODO
-		return null;
+		Thread output = new Thread(() -> {
+			s.println(PROCRASTINATOR_PROCRASTINATING_MSG);
+			Thread.onSpinWait();
+			System.out.println(LUCKY_PROCRASTINATOR_WORKING_MSG);
+		});
+
+		return output;
 	}
 
 	/**
