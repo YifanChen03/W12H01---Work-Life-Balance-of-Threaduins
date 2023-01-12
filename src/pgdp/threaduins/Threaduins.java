@@ -96,6 +96,17 @@ public final class  Threaduins {
 	 */
 	public static void stopProcrastinator(Thread procrastinator) {
 		// TODO
+		procrastinator.start();
+		signal.await();
+		procrastinator.notify();
+
+		try {
+			procrastinator.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println(STOPPED_MSG);
 	}
 
 	public static void main(String... args) {
